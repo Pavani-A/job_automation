@@ -48,10 +48,12 @@ Once collected, **summarize the profile back** to the user for confirmation. Sto
 Unless the user explicitly changes a preference for the current search, use these defaults:
 
 - **Location:** Bangalore/Bengaluru only
-- **Experience:** Fresher / 0–1 year
+- **Relevant experience:** 1 year of Software Engineering internship experience
+- **Target seniority:** Fresher / Entry-level / Junior roles compatible with 1 year of experience
 - **Role:** Development / Software Engineering only
 - **Primary targets:** SDE-1, Software Engineer, Software Developer, Backend Developer/Engineer, Python Developer/Backend, Full Stack Developer, Java Backend Developer, and genuine AI/ML/GenAI Engineer development roles
-- **Exclude:** QA, testing, SDET, support, operations, non-development analyst roles, and roles requiring >1 year experience
+- **Exclude:** QA, testing, SDET, support, operations, non-development analyst roles, and roles requiring more than 1 year at the minimum experience level
+- **Experience rule:** Accept any JD whose stated range includes 1 year, including 0–1, 0–2, 0–3, 1–2, and 1–3 years. Reject when the minimum required experience is greater than 1 year.
 - **Resume selection:** Automatically choose the correct specialized base resume before tailoring each application
 - **Application-material threshold:** Fitness >= 70% after hard-filter validation
 - **Do not apply automatically:** The automation prepares materials and links; the user reviews and submits manually
@@ -130,21 +132,44 @@ Then run the search across the platforms below, applying the HARD FILTERS before
 
 **HARD FILTERS — NEVER RELAX THESE AUTOMATICALLY**
 
-1. **Location:** Bangalore/Bengaluru only. Reject Hyderabad, Pune, Mumbai, Chennai, Delhi-NCR, remote-only, overseas, and multi-location listings unless Bangalore is explicitly the selectable work location.
-2. **Experience:** 0–1 year only. Accept fresher, graduate, entry-level, 0 years, 0–1 years. Reject listings whose minimum experience is above 1 year. If a listing says 1–2 years, reject it.
+1. **Location:** Bangalore/Bengaluru only. Reject Hyderabad, Pune, Mumbai, Chennai, Delhi-NCR, remote-only, overseas, and multi-location listings unless Bangalore is explicitly available as the work location.
+2. **Experience:** The user's relevant experience is **1 year of Software Engineering internship experience**. Accept roles where a candidate with 1 year of experience is eligible:
+   - Fresher / Graduate / Entry Level / 0 years → ACCEPT
+   - 0–1 years → ACCEPT
+   - 0–2 years → ACCEPT
+   - 0–3 years → ACCEPT
+   - 1 year → ACCEPT
+   - 1–2 years → ACCEPT
+   - 1–3 years → ACCEPT
+   - 1–4 years → ACCEPT if the role is otherwise entry-level/junior and Bangalore development-only
+   - 2+ years / 2–3 years / 2–4 years / 3+ years → REJECT because the minimum required experience is greater than the user's 1 year
+   - If a JD uses ambiguous wording such as "1+ years", interpret it as requiring at least 1 year and ACCEPT if all other hard filters pass.
+   - If the experience requirement cannot be determined, mark **Needs Verification** rather than assuming eligibility.
+   - Do not reject a role merely because it says "1–3 years" or "1–2 years"; the user's 1 year falls within that range.
 3. **Function:** Development/software engineering only. Accept backend, frontend, full-stack, software engineering, application development, Python/Java development, and genuine AI/ML/GenAI engineering development roles.
 4. **Reject:** QA, Quality Analyst, manual testing, test engineer, automation testing, SDET, test automation, technical support, production support, IT support, customer support, operations, non-development analyst roles, business analyst roles, and other non-development positions.
 5. **No inferred eligibility:** If experience or location cannot be verified from the listing, mark the job as **Needs Verification** rather than assuming it qualifies.
+
+### Resume Library — Source of Truth
+
+The user has four base resumes. Treat these as the source of truth and select one before tailoring:
+
+- **Pavani_python.pdf** — Python/backend-focused resume.
+- **Pavani_full_stack.pdf** — Full-stack + Java/Spring Boot-focused resume.
+- **Pavani_AI.pdf** — AI/ML/GenAI + Python backend-focused resume.
+- **Pavani_A.pdf** — General Software Engineer resume.
+
+Do not invent a fifth resume category. If a job does not clearly fit one specialized resume, use the general Software Engineer resume.
 
 ### Resume Selection — HARD RULE
 
 Before tailoring any resume, classify the job by its actual responsibilities and required stack. Select the user's most appropriate base resume:
 
-- **Python Backend Resume:** Python, FastAPI, Django, Flask, REST APIs, backend services, APIs, microservices.
-- **Full Stack Resume:** React/Next.js/frontend plus backend/API/full-stack responsibilities.
-- **AI/ML Resume:** AI/ML/GenAI development, model building, TensorFlow/Keras/scikit-learn, LLM integration, ML APIs, or similar engineering work.
-- **Java Backend Resume:** Java, Spring Boot, REST APIs, backend services, SQL, microservices.
-- **General SDE/Software Developer Resume:** General software-development/SDE roles where no specialized resume is clearly more appropriate.
+- **Python Backend Resume:** Python, FastAPI, Django, Flask, REST APIs, backend services, APIs, microservices. Use `Pavani_python.pdf`.
+- **Full Stack Resume:** React/Next.js/frontend plus backend/API/full-stack responsibilities. Use `Pavani_full_stack.pdf`.
+- **AI/ML Resume:** AI/ML/GenAI development, model building, TensorFlow/Keras/scikit-learn, LLM integration, ML APIs, or similar engineering work. Use `Pavani_AI.pdf`.
+- **Java Backend Resume:** Java, Spring Boot, REST APIs, backend services, SQL, microservices. Use `Pavani_full_stack.pdf`.
+- **General SDE/Software Developer Resume:** General software-development/SDE roles where no specialized resume is clearly more appropriate. Use `Pavani_A.pdf`.
 
 Use the selected base resume as the source of truth. Tailor it to the JD, but NEVER add a skill, technology, responsibility, achievement, or experience the user does not actually have. If multiple resumes could apply, choose based on the primary responsibilities and stack of the job, not simply the highest keyword count.
 
@@ -200,9 +225,9 @@ For each job found, **automatically generate**:
 
 Before presenting any result, run this final eligibility check:
 
-**ELIGIBLE = Bangalore/Bengaluru + 0–1 year + development role + live/verified listing.**
+**ELIGIBLE = Bangalore/Bengaluru + the JD's experience range includes the user's 1 year + development role + live/verified listing.**
 
-If any one of these fails, exclude the job from the main results. Do not compensate for a failed hard filter with a high Fitness Score.
+If any one of these fails, exclude the job from the main results. Do not compensate for a failed hard filter with a high Fitness Score. A `1–2` or `1–3` requirement is eligible because the user's 1 year falls within the stated range.
 
 Then present results in this table:
 
